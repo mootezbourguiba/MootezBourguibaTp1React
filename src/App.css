@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Ajoutez des styles personnalisés pour les boutons */
+.btn-primary {
+  background-color: #007bff; /* Remplacez par la couleur souhaitée */
+  border-color: #007bff; /* Remplacez par la couleur souhaitée */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Remplacez par la couleur souhaitée */
+  border-color: #dc3545; /* Remplacez par la couleur souhaitée */
+}
+
+.event-card {
+  margin-bottom: 20px;
+}
