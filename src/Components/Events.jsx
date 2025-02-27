@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Event from './Event';
 import eventsData from '../data/events.json';
-import { Alert, Container, Row, Col } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 
 function Events() {
-  const [events, setEvents] = useState([...eventsData]); // Utiliser une copie des données
+  const [events, setEvents] = useState([...eventsData]);
   const [showAlert, setShowAlert] = useState(true);
 
   useEffect(() => {
-    // Simule le chargement des données après 3 secondes
     const timer1 = setTimeout(() => {
       setShowAlert(false);
     }, 3000);
@@ -31,14 +30,11 @@ function Events() {
           Hey welcome to Esprit Events!
         </Alert>
       )}
-      <Row>
+      <div style={{ display: 'flex', justifyContent: 'space-around', overflowX: 'auto', gap: '20px', paddingBottom: '10px' }}>
         {events.map(event => (
-          // Assurez-vous que chaque Col a une clé unique et que les événements sont bien affichés en colonnes
-          <Col md={4} key={event.id} className="mb-3">
-            <Event event={event} updateEvent={updateEvent} />
-          </Col>
+          <Event key={event.id} event={event} updateEvent={updateEvent} />
         ))}
-      </Row>
+      </div>
     </Container>
   );
 }

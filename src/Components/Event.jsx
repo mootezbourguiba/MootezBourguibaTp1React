@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { Card, Button, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Importer Link
 
-// Import des images
 import event1 from '../assets/event1.jpg';
 import event2 from '../assets/event2.jpg';
 import event3 from '../assets/event3.jpg';
-import soldOutImg from '../assets/sold_out.png'; // Ajout de l'image Sold Out
-import placeholderImg from '../assets/placeholder.jpg'; // Ajout du placeholder
+import soldOutImg from '../assets/sold_out.png';
+import placeholderImg from '../assets/placeholder.jpg';
 
-// Mapping des images
 const imageMap = {
   "event1.jpg": event1,
   "event2.jpg": event2,
   "event3.jpg": event3,
-  "sold_out.png": soldOutImg, // Ajout du mapping pour Sold Out
-  "placeholder.jpg": placeholderImg, // Ajout du mapping pour le placeholder
+  "sold_out.png": soldOutImg,
+  "placeholder.jpg": placeholderImg,
 };
 
 function Event({ event, updateEvent }) {
@@ -32,39 +31,40 @@ function Event({ event, updateEvent }) {
         nbTickets: event.nbTickets - 1,
         nbParticipants: event.nbParticipants + 1,
       };
-      updateEvent(updatedEvent); // Mettre à jour l'événement dans le composant parent
+      updateEvent(updatedEvent);
       setShowConfirmation(true);
-      setTimeout(() => setShowConfirmation(false), 3000); // Message pendant 3 secondes
+      setTimeout(() => setShowConfirmation(false), 3000);
     }
   };
 
   return (
-    <Card className="event-card">
+    <Card className="event-card" style={{ width: '30vw', minWidth: '300px' }}>
       <Card.Img
         variant="top"
-        src={event.nbTickets === 0 ? imageMap["sold_out.png"] : imageMap[event.img] || imageMap["placeholder.jpg"]} // Image Sold Out ou event.img ou placeholder
+        src={event.nbTickets === 0 ? imageMap["sold_out.png"] : imageMap[event.img] || imageMap["placeholder.jpg"]}
         alt={event.name}
-        style={{ height: '200px', objectFit: 'cover' }}
+        className="event-image"
       />
       <Card.Body>
-        <Card.Title>{event.name}</Card.Title>
+        <Card.Title>
+          <Link to={`/events/${event.name}`}>{event.name}</Link>
+        </Card.Title>
         <Card.Text>{event.description}</Card.Text>
         <Card.Text>Price: {event.price}</Card.Text>
         <Card.Text>Number of tickets: {event.nbTickets}</Card.Text>
         <Card.Text>Number of participants: {event.nbParticipants}</Card.Text>
-        <div className="d-flex justify-content-between align-items-center"> {/* Ajout d'un container flex */}
+        <div className="d-flex justify-content-between align-items-center">
           {event.nbTickets === 0 ? (
             <Alert variant="danger">Sold Out</Alert>
           ) : (
-            <Button variant="primary" onClick={bookEvent}>
+            <Button className="book-event-button" onClick={bookEvent}>
               Book an event
             </Button>
           )}
-          <Button variant={liked ? "danger" : "primary"} onClick={toggleLike}>
+          <Button className="like-button" onClick={toggleLike}>
             {liked ? "Dislike" : "Like"}
           </Button>
         </div>
-        {/* Message de confirmation */}
         {showConfirmation && (
           <Alert variant="success">You have booked an event!</Alert>
         )}
