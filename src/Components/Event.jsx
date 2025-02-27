@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Importer Link
+import { Link } from 'react-router-dom';
 
+// Import des images (vérifiez que les chemins sont corrects !)
 import event1 from '../assets/event1.jpg';
 import event2 from '../assets/event2.jpg';
 import event3 from '../assets/event3.jpg';
@@ -9,9 +10,9 @@ import soldOutImg from '../assets/sold_out.png';
 import placeholderImg from '../assets/placeholder.jpg';
 
 const imageMap = {
-  "event1.jpg": event1,
-  "event2.jpg": event2,
-  "event3.jpg": event3,
+  "Festival international de Carthage": event1,
+  "Festival de la médina de Tunis": event2,
+  "Journées cinématographiques de Carthage (JCC)": event3,
   "sold_out.png": soldOutImg,
   "placeholder.jpg": placeholderImg,
 };
@@ -41,7 +42,7 @@ function Event({ event, updateEvent }) {
     <Card className="event-card" style={{ width: '30vw', minWidth: '300px' }}>
       <Card.Img
         variant="top"
-        src={event.nbTickets === 0 ? imageMap["sold_out.png"] : imageMap[event.img] || imageMap["placeholder.jpg"]}
+        src={imageMap[event.name] || placeholderImg} // Simplification du code
         alt={event.name}
         className="event-image"
       />

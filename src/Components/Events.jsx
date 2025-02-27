@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Event from './Event';
-import eventsData from '../data/events.json';
 import { Alert, Container } from 'react-bootstrap';
+import { getAllEvents } from '../service/api';
 
 function Events() {
-  const [events, setEvents] = useState([...eventsData]);
+  const [events, setEvents] = useState([]);
   const [showAlert, setShowAlert] = useState(true);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllEvents();
+      setEvents(data);
+    };
+
+    fetchData();
+
     const timer1 = setTimeout(() => {
       setShowAlert(false);
     }, 3000);

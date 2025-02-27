@@ -14,3 +14,9 @@
 .event-card {
   margin-bottom: 20px;
 }
+
+/* Styles pour le lien actif dans la barre de navigation */
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

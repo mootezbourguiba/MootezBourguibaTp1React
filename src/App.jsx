@@ -1,28 +1,21 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import Events from './Components/Events'; // Retirez l'import classique
-// import EventDetails from './Components/EventDetails'; // Retirez l'import classique
-// import NotFound from './Components/NotFound'; // Retirez l'import classique
-import NavigationBar from './Components/NavigationBar'; // Nouveau composant
-
-// Lazy load des composants
-const Events = lazy(() => import('./Components/Events'));
-const EventDetails = lazy(() => import('./Components/EventDetails'));
-const NotFound = lazy(() => import('./Components/NotFound'));
-
+import Events from './Components/Events';
+import EventDetails from './Components/EventDetails';
+import NotFound from './Components/NotFound';
+import NavigationBar from './Components/NavigationBar';
+import AddEvent from './Components/AddEvent'; // Import du nouveau composant
 function App() {
   return (
     <>
       <NavigationBar />
-      <Suspense fallback={<div>Loading...</div>}> {/* Afficher un message de chargement */}
-        <Routes>
-          <Route path="/" element={<Events />} />
-          <Route path="/events/:eventName" element={<EventDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<Events />} />
+        <Route path="/events/:eventName" element={<EventDetails />} />
+        <Route path="/addEvent" element={<AddEvent />} /> {/* Route pour AddEvent */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
-
 export default App;
